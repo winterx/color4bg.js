@@ -1,0 +1,8 @@
+**/*
+!/build/**
+!/src/**
+!index.js
+!CHANGELOG.md
+!LICENSE
+!README.md
+!SECURITY.md

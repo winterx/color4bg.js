@@ -1,0 +1,46 @@
+{
+    "name": "ogl",
+    "version": "1.0.6",
+    "description": "WebGL Library",
+    "type": "module",
+    "main": "./src/index.js",
+    "exports": {
+        ".": {
+            "types": "./types/index.d.ts",
+            "default": "./src/index.js"
+        },
+        "./src/*": "./src/*"
+    },
+    "sideEffects": false,
+    "types": "./types/index.d.ts",
+    "directories": {
+        "example": "examples"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://gordonnl@github.com/oframe/ogl.git"
+    },
+    "author": {
+        "name": "Nathan Gordon",
+        "email": "gordonnl@gmail.com",
+        "url": "https://twitter.com/gordonnl"
+    },
+    "license": "Unlicense",
+    "bugs": {
+        "url": "https://github.com/oframe/ogl/issues"
+    },
+    "homepage": "https://github.com/oframe/ogl#readme",
+    "prettier": {
+        "arrowParens": "always",
+        "bracketSpacing": true,
+        "endOfLine": "lf",
+        "htmlWhitespaceSensitivity": "css",
+        "printWidth": 150,
+        "quoteProps": "as-needed",
+        "semi": true,
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "es5",
+        "useTabs": false
+    }
+}

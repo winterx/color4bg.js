@@ -1,0 +1,159 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<title>Demo color4bg.js</title>
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			.bg-item {
+				margin-bottom: 1rem;
+				width: 100%;
+			}
+			.bg-item img {
+				display: block;
+			}
+			.bg-item .title {
+				font-size: 14px;
+			}
+
+			#bg_list::-webkit-scrollbar {
+				width: 5px;
+			}
+			#bg_list::-webkit-scrollbar-track {
+				margin: 20px;
+			}
+			#bg_list::-webkit-scrollbar-thumb {
+				background-color: #e5e7eb;
+				border-radius: 4px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="flex h-full">
+			<div class="p-6 w-2/12 h-full">
+				<div id="bg_list" class="p-6 w-full h-full bg-gray-100 overflow-y-auto overflow-x-hidden rounded-2xl">
+					<!-- <div class="bg-item" id="fluid">
+						<img src="./assets/images/aesthetic-fluid.jpg" alt="" width="100%" />
+						<div class="title">Aethetic Fluid</div>
+					</div> -->
+				</div>
+			</div>
+
+			<div class="p-6 w-10/12 h-full bg-white">
+				<div id="box" class="flex items-center justify-center w-full h-full bg-gray-100 rounded-2xl overflow-hidden">
+					<h1 class="z-50 text-6xl font-bold text-white">Color4Bg</h1>
+				</div>
+			</div>
+		</div>
+
+		<script type="module">
+			import { AbstractShapeBg } from "../build/jsm/AbstractShapeBg.module.js"
+			import { AestheticFluidBg } from "../build/jsm/AestheticFluidBg.module.js"
+			import { BigBlobBg } from "../build/jsm/BigBlobBg.module.js"
+			import { BlurDotBg } from "../build/jsm/BlurDotBg.module.js"
+			import { BlurGradientBg } from "../build/jsm/BlurGradientBg.module.js"
+			import { RandomCubesBg } from "../build/jsm/RandomCubesBg.module.js"
+			import { TrianglesMosaicBg } from "../build/jsm/TrianglesMosaicBg.module.js"
+			import { WavyWavesBg } from "../build/jsm/WavyWavesBg.module.js"
+
+			let colorbgs = [
+				{
+					name: "Abstract Shape",
+					img: "AbstractShape",
+                    bg: AbstractShapeBg
+				},
+				{
+					name: "Aesthetic Fluid",
+					img: "AestheticFluid",
+                    bg: AestheticFluidBg
+				},
+				{
+					name: "Blur Dot",
+					img: "BlurDot",
+                    bg: BlurDotBg
+				},
+				{
+					name: "Blur Gradient",
+					img: "BlurGradient",
+                    bg: BlurGradientBg
+				},
+				{
+					name: "Triangles Mosaic",
+					img: "TrianglesMosaic",
+                    bg: TrianglesMosaicBg
+				},
+				{
+					name: "Random Cubes",
+					img: "RandomCubes",
+                    bg: RandomCubesBg
+				},
+				{
+					name: "Wavy Waves",
+					img: "WavyWaves",
+                    bg: WavyWavesBg
+				},
+				{
+					name: "Big Blob",
+					img: "BigBlob",
+                    bg: BigBlobBg
+				}
+			]
+
+			let colorbg = new AestheticFluidBg({
+				dom: "box",
+				colors: ["#D1ADFF", "#98D69B", "#FAE390", "#FFACD8", "#7DD5FF", "#D1ADFF"],
+				seed: 1000,
+				loop: true
+			})
+
+			console.log(colorbg)
+
+			const $list = document.querySelector("#bg_list")
+
+			colorbgs.forEach((item, index) => {
+				let imgnode = document.createElement("IMG")
+				imgnode.src = `./assets/images/${item.img}.jpg`
+
+				let titlenode = document.createElement("DIV")
+				titlenode.setAttribute("class", "title")
+				titlenode.textContent = item.name
+
+				let childnode = document.createElement("DIV")
+				childnode.setAttribute("data-bg", item.img)
+				childnode.setAttribute("class", "bg-item")
+				childnode.appendChild(imgnode)
+				childnode.appendChild(titlenode)
+
+				childnode.addEventListener("click", function (e) {
+					let nextbg = e.target.parentNode.dataset.bg
+					onChangeBackground(nextbg)
+				})
+
+				$list.appendChild(childnode)
+			})
+
+			function onChangeBackground(bgname) {
+				colorbg.destroy()
+                
+				let result = colorbgs.find(function (item) {
+					return item.img === bgname
+				})
+
+                colorbg = new result.bg({
+				dom: "box",
+				colors: ["#D1ADFF", "#98D69B", "#FAE390", "#FFACD8", "#7DD5FF", "#D1ADFF"],
+				seed: 1000,
+				loop: true
+			})
+
+			}
+		</script>
+	</body>
+</html>
