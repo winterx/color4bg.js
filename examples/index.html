@@ -3,6 +3,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="./data.js"></script>
 		<title>Demo color4bg.js</title>
 		<style>
 			html,
@@ -32,23 +33,34 @@
 				background-color: #e5e7eb;
 				border-radius: 4px;
 			}
+
+			.colors-list-box {
+				transform-origin: 100% 0;
+				transform: scale(0);
+				opacity: 0;
+			}
+			.colors-list-box.show {
+				transform: scale(1);
+				opacity: 1;
+			}
 		</style>
 	</head>
 
 	<body>
 		<div class="flex h-full">
 			<div class="p-6 w-2/12 h-full">
-				<div id="bg_list" class="p-6 w-full h-full bg-gray-100 overflow-y-auto overflow-x-hidden rounded-2xl">
-					<!-- <div class="bg-item" id="fluid">
-						<img src="./assets/images/aesthetic-fluid.jpg" alt="" width="100%" />
-						<div class="title">Aethetic Fluid</div>
-					</div> -->
-				</div>
+				<div id="bg_list" class="p-6 w-full h-full bg-gray-100 overflow-y-auto overflow-x-hidden rounded-2xl"></div>
 			</div>
 
 			<div class="p-6 w-10/12 h-full bg-white">
-				<div id="box" class="flex items-center justify-center w-full h-full bg-gray-100 rounded-2xl overflow-hidden">
+				<div id="box" class="relative flex items-center justify-center w-full h-full bg-gray-100 rounded-2xl overflow-hidden">
 					<h1 class="z-50 text-6xl font-bold text-white">Color4Bg</h1>
+					<div class="z-50 absolute top-4 right-4" id="box_colors">
+						<div class="absolute p-4 right-0 text-4xl rounded-full bg-gray-100/20 cursor-pointer hover:bg-gray-100/30 transition" id="btn_show_colors">🎨</div>
+						<div class="colors-list-box relative p-4 top-0 right-0 bg-gray-100 rounded-2xl transition">
+							<ul id="colors_list"></ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -59,6 +71,7 @@
 			import { BigBlobBg } from "../build/jsm/BigBlobBg.module.js"
 			import { BlurDotBg } from "../build/jsm/BlurDotBg.module.js"
 			import { BlurGradientBg } from "../build/jsm/BlurGradientBg.module.js"
+			import { AmbientLightBg } from "../src/color4bg/AbstractBackground/AmbientLightBg.js"
 			import { RandomCubesBg } from "../build/jsm/RandomCubesBg.module.js"
 			import { TrianglesMosaicBg } from "../build/jsm/TrianglesMosaicBg.module.js"
 			import { WavyWavesBg } from "../build/jsm/WavyWavesBg.module.js"
@@ -67,53 +80,90 @@
 				{
 					name: "Abstract Shape",
 					img: "AbstractShape",
-                    bg: AbstractShapeBg
+					bg: AbstractShapeBg
 				},
 				{
 					name: "Aesthetic Fluid",
 					img: "AestheticFluid",
-                    bg: AestheticFluidBg
+					bg: AestheticFluidBg
 				},
 				{
 					name: "Blur Dot",
 					img: "BlurDot",
-                    bg: BlurDotBg
+					bg: BlurDotBg
 				},
 				{
 					name: "Blur Gradient",
 					img: "BlurGradient",
-                    bg: BlurGradientBg
+					bg: BlurGradientBg
+				},
+				{
+					name: "Curl Gradient",
+					img: "AmbientLight",
+					bg: AmbientLightBg
 				},
 				{
 					name: "Triangles Mosaic",
 					img: "TrianglesMosaic",
-                    bg: TrianglesMosaicBg
+					bg: TrianglesMosaicBg
 				},
 				{
 					name: "Random Cubes",
 					img: "RandomCubes",
-                    bg: RandomCubesBg
+					bg: RandomCubesBg
 				},
 				{
 					name: "Wavy Waves",
 					img: "WavyWaves",
-                    bg: WavyWavesBg
+					bg: WavyWavesBg
 				},
 				{
 					name: "Big Blob",
 					img: "BigBlob",
-                    bg: BigBlobBg
+					bg: BigBlobBg
 				}
 			]
 
-			let colorbg = new AestheticFluidBg({
+			let palette = Colors["blue"]
+
+			// let colorbg = new AestheticFluidBg({
+			let colorbg = new AmbientLightBg({
 				dom: "box",
-				colors: ["#D1ADFF", "#98D69B", "#FAE390", "#FFACD8", "#7DD5FF", "#D1ADFF"],
+				colors: palette,
 				seed: 1000,
 				loop: true
 			})
 
-			console.log(colorbg)
+			for (const paletteKey in Colors) {
+				let _colors = Colors[paletteKey]
+
+				let colorrow = document.createElement("li")
+				colorrow.setAttribute("class", "color-row m-2 p-3 min-w-40 flex justify-evenly hover:bg-white/50 rounded-lg cursor-pointer")
+				colorrow.addEventListener("click", () => [changePalette(_colors)])
+
+				_colors.forEach((hex, i) => {
+					let c = document.createElement("DIV")
+					c.setAttribute("class", "color w-5 h-5 rounded-lg")
+					c.setAttribute("style", "background:" + hex)
+					colorrow.appendChild(c)
+				})
+
+				colors_list.appendChild(colorrow)
+			}
+			
+			function changePalette(colors) {
+				document.querySelector("#box_colors").classList.remove("show")
+				palette = [...colors]
+				colorbg.colors(palette)
+			}
+
+			document.querySelector("#btn_show_colors").addEventListener("mouseenter", () => {
+				document.querySelector(".colors-list-box").classList.add("show")
+			})
+
+			document.querySelector("#box_colors").addEventListener("mouseleave", () => {
+				document.querySelector(".colors-list-box").classList.remove("show")
+			})
 
 			const $list = document.querySelector("#bg_list")
 
@@ -141,18 +191,18 @@
 
 			function onChangeBackground(bgname) {
 				colorbg.destroy()
-                
+
 				let result = colorbgs.find(function (item) {
 					return item.img === bgname
 				})
 
-                colorbg = new result.bg({
-				dom: "box",
-				colors: ["#D1ADFF", "#98D69B", "#FAE390", "#FFACD8", "#7DD5FF", "#D1ADFF"],
-				seed: 1000,
-				loop: true
-			})
-
+				colorbg = new result.bg({
+					dom: "box",
+					// colors: ["#D1ADFF", "#98D69B", "#FAE390", "#FFACD8", "#7DD5FF", "#D1ADFF"],
+					colors: ["#F00911", "#F3AA00", "#F6EE0B", "#39E90D", "#195ED2", "#F00911"],
+					seed: 1000,
+					loop: true
+				})
 			}
 		</script>
 	</body>
