@@ -2,18 +2,24 @@ import { Plane, Program, Mesh, RenderTarget, Camera, Vec2, Color } from "../../o
 import { ColorBg } from "../ColorBg.js"
 
 const types = {
-    "ambient-light": {
-        st_scale: 1.0,
-        curl_scale: 4.5,
-        factor: 0.2,
-        background: 0.0,
-    },
-    "abstract-floating-colors": {
-        st_scale: 5.0,
-        curl_scale: 0.5,
-        factor: 1.2,
-        background: 1.0
-    }
+	"ambient-light": {
+		st_scale: 1.0,
+		curl_scale: 5.0,
+		brightness: 0.2,
+		darkness: 0.0
+	},
+	"abstract-floating-colors": {
+		st_scale: 5.0,
+		curl_scale: 0.5,
+		brightness: 1.2,
+		darkness: 0.0
+	},
+    "test": {
+		st_scale: 1.2,
+		curl_scale: 0.5,
+		brightness: 1.2,
+		darkness: 0.0
+	},
 }
 
 const type = "ambient-light"
@@ -22,12 +28,13 @@ export class AmbientLightBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 6)
 
-        this.typedata = types[ type ]
+		this.typedata = types[type]
+		this.speed = 500
 
 		this.start()
 	}
 
-	_initRtt() {       
+	_initRtt() {
 		// RTT--RENDER TO TEXTURE
 		this.rtt = new RenderTarget(this.gl, {
 			width: 512,
@@ -219,8 +226,8 @@ export class AmbientLightBg extends ColorBg {
 
                 uniform float u_st_scale;
                 uniform float u_curl_scale;
-                uniform float u_factor;
-                uniform float u_background;
+                uniform float u_brightness;
+                uniform float u_darkness;
         
                 void main()
                 {
@@ -229,14 +236,14 @@ export class AmbientLightBg extends ColorBg {
 
                     vec3 d3 = curl( vec3( st * u_st_scale, u_time ) ) * u_curl_scale + 0.5;
 
-                    vec4 color_0 = vec4( u_color_0, d3.r * u_factor );
-                    vec4 color_1 = vec4( u_color_1, d3.g * u_factor );
-                    vec4 color_2 = vec4( u_color_2, d3.b * u_factor );
-                    vec4 color_3 = vec4( u_color_3, d3.r * u_factor );
-                    vec4 color_4 = vec4( u_color_4, d3.g * u_factor );
-                    vec4 color_5 = vec4( u_color_5, d3.b * u_factor );
+                    vec4 color_0 = vec4( u_color_0, d3.r * u_brightness );
+                    vec4 color_1 = vec4( u_color_1, d3.g * u_brightness );
+                    vec4 color_2 = vec4( u_color_2, d3.b * u_brightness );
+                    vec4 color_3 = vec4( u_color_3, d3.r * u_brightness );
+                    vec4 color_4 = vec4( u_color_4, d3.g * u_brightness );
+                    vec4 color_5 = vec4( u_color_5, d3.b * u_brightness );
 
-                    vec3 color = vec3( u_background );
+                    vec3 color = vec3( u_darkness );
                     
                     color = blendColor( color, color_0.rgb, color_0.a );
                     color = blendColor( color, color_1.rgb, color_1.a );
@@ -262,13 +269,12 @@ export class AmbientLightBg extends ColorBg {
 				u_color_3: { value: new Color(this.palette[3]) },
 				u_color_4: { value: new Color(this.palette[4]) },
 				u_color_5: { value: new Color(this.palette[5]) },
-                u_st_scale: { value: this.typedata["st_scale"] },
-                u_curl_scale: { value: this.typedata["curl_scale"] },
-                u_factor: { value: this.typedata["factor"] },
-                u_background: { value: this.typedata["background"] }
+				u_st_scale: { value: this.typedata["st_scale"] },
+				u_curl_scale: { value: this.typedata["curl_scale"] },
+				u_brightness: { value: this.typedata["brightness"] },
+				u_darkness: { value: this.typedata["darkness"] }
 			}
 		})
-
 
 		this.rttPlane = new Mesh(this.gl, { geometry: this.rttPlaneGeo, program: this.rttProgram })
 		this.isRenderTarget = true
@@ -340,18 +346,43 @@ export class AmbientLightBg extends ColorBg {
 		this.rttProgram.uniforms.u_color_1.value = new Color(this.palette[1])
 		this.rttProgram.uniforms.u_color_2.value = new Color(this.palette[2])
 		this.rttProgram.uniforms.u_color_3.value = new Color(this.palette[3])
-		this.rttProgram.uniforms.u_color_1.value = new Color(this.palette[4])
-		this.rttProgram.uniforms.u_color_2.value = new Color(this.palette[5])
+		this.rttProgram.uniforms.u_color_4.value = new Color(this.palette[4])
+		this.rttProgram.uniforms.u_color_5.value = new Color(this.palette[5])
 	}
 
 	_animate() {
-		this.rttProgram.uniforms.u_time.value = this.frame / 200
+		this.rttProgram.uniforms.u_time.value = this.frame / this.speed
 	}
 
 	update(option, val) {
 		switch (option) {
 			case "noise":
 				this._planeShader.uniforms.uNoiseFactor.value = parseFloat(val)
+				break
+
+			case "speed":
+				let v = parseInt(val)
+				this.speed = (v * -400) / 9 + 4900 / 9
+				break
+
+			case "pattern scale":
+                let s = parseFloat(val)
+				this.rttProgram.uniforms.u_st_scale.value = -19 * s + 20
+				break
+
+			case "edge blur":
+                let e = parseFloat(val)
+				this.rttProgram.uniforms.u_curl_scale.value = -4 * e + 5
+				break
+
+			case "brightness":
+                let b = parseFloat(val)
+				this.rttProgram.uniforms.u_brightness.value = b
+				break
+
+			case "darkness":
+                let d = parseFloat(val)
+				this.rttProgram.uniforms.u_darkness.value = d
 				break
 		}
 	}

@@ -1,0 +1,70 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="./data.js"></script>
+        <script src="../build/js/AmbientLightBg.min.js"></script>
+		<title>Demo color4bg.js</title>
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			.bg-item {
+				margin-bottom: 1rem;
+				width: 100%;
+			}
+			.bg-item img {
+				display: block;
+			}
+			.bg-item .title {
+				font-size: 14px;
+			}
+
+			#bg_list::-webkit-scrollbar {
+				width: 5px;
+			}
+			#bg_list::-webkit-scrollbar-track {
+				margin: 20px;
+			}
+			#bg_list::-webkit-scrollbar-thumb {
+				background-color: #e5e7eb;
+				border-radius: 4px;
+			}
+
+			.colors-list-box {
+				transform-origin: 100% 0;
+				transform: scale(0);
+				opacity: 0;
+			}
+			.colors-list-box.show {
+				transform: scale(1);
+				opacity: 1;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="flex h-full">
+			<div class="p-6 w-full h-full bg-white">
+				<div id="box" class="relative flex items-center justify-center w-full h-full bg-gray-100 rounded-2xl overflow-hidden">
+					<h1 class="z-50 text-6xl font-bold text-white">Demo of Color4Bg</h1>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			let palette = Colors["blue"]
+
+			let colorbg = new Color4Bg.AmbientLightBg({
+				dom: "box",
+				colors: palette,
+				seed: 1000,
+				loop: true
+			})
+		</script>
+	</body>
+</html>

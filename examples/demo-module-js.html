@@ -49,7 +49,7 @@
 	<body>
 		<div class="flex h-full">
 			<div class="p-6 w-2/12 h-full">
-				<div id="bg_list" class="p-6 w-full h-full bg-gray-100 overflow-y-auto overflow-x-hidden rounded-2xl"></div>
+				<div id="bg_list" class="p-6 w-full h-full overflow-y-auto overflow-x-hidden rounded-2xl"></div>
 			</div>
 
 			<div class="p-6 w-10/12 h-full bg-white">
@@ -71,7 +71,7 @@
 			import { BigBlobBg } from "../build/jsm/BigBlobBg.module.js"
 			import { BlurDotBg } from "../build/jsm/BlurDotBg.module.js"
 			import { BlurGradientBg } from "../build/jsm/BlurGradientBg.module.js"
-			import { AmbientLightBg } from "../src/color4bg/AbstractBackground/AmbientLightBg.js"
+			import { AmbientLightBg } from "../build/jsm/AmbientLightBg.module.js"
 			import { RandomCubesBg } from "../build/jsm/RandomCubesBg.module.js"
 			import { TrianglesMosaicBg } from "../build/jsm/TrianglesMosaicBg.module.js"
 			import { WavyWavesBg } from "../build/jsm/WavyWavesBg.module.js"
@@ -170,9 +170,10 @@
 			colorbgs.forEach((item, index) => {
 				let imgnode = document.createElement("IMG")
 				imgnode.src = `./assets/images/${item.img}.jpg`
+				imgnode.setAttribute("class", "rounded-lg hover:opacity-85 cursor-pointer")
 
 				let titlenode = document.createElement("DIV")
-				titlenode.setAttribute("class", "title")
+				titlenode.setAttribute("class", "mt-1 text-sm text-gray-500")
 				titlenode.textContent = item.name
 
 				let childnode = document.createElement("DIV")
