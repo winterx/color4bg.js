@@ -6,6 +6,7 @@ import { Distribution } from "../../ogl/src/utils/Distribution.js"
 export class RandomCubesBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 4)
+		this.name = "random-cubes"
 
 		this.options = this.params.options || {}
 

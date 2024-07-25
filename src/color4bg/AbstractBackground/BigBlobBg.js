@@ -6,6 +6,7 @@ import { BlobMorph } from "../../ogl/src/utils/BlobMorph.js"
 export class BigBlobBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 6)
+		this.name = "blur-dot"
 
 		this.options = this.params.options || {}
 

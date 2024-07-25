@@ -27,6 +27,7 @@ const type = "ambient-light"
 export class AmbientLightBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 6)
+		this.name = "ambient-light"
 
 		this.typedata = types[type]
 		this.speed = 500

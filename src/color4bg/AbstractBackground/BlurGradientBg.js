@@ -4,6 +4,7 @@ import { ColorBg } from "../ColorBg.js"
 export class BlurGradientBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 4)
+		this.name = "blur-gradient"
 
 		this.start()
 	}

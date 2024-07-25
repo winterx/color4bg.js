@@ -4,6 +4,7 @@ import { ColorBg } from "../ColorBg.js"
 export class WavyWavesBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 6)
+		this.name = "wavy-waves"
 
 		this.options = this.params.options || {}
 

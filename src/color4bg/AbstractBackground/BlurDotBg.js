@@ -4,6 +4,7 @@ import { ColorBg } from "../ColorBg.js"
 export class BlurDotBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 4)
+		this.name = "blur-dot"
 
 		this.options = this.params.options || {}
 		this.ratio

@@ -5,6 +5,7 @@ import { CanvasAbstractShapes } from "../../ogl/src/utils/CanvasAbstract.js"
 export class AbstractShapeBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 6)
+		this.name = "abstract-shape"
 
 		this.options = this.params.options || {
 			noise: 0.05

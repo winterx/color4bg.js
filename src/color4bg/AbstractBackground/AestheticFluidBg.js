@@ -5,6 +5,7 @@ import { MorphSurfaceConvex } from "../../ogl/src/utils/GeometryMorph.js"
 export class AestheticFluidBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 6)
+		this.name = "aesthetic-fluid"
 
 		this.options.radius_inner = params.radius_inner || 0.1
 		this.options.radius_outer = params.radius_outer || 0.3

@@ -3,24 +3,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script src="https://cdn.tailwindcss.com"></script>
-		<script src="./data.js"></script>
 		<title>Demo color4bg.js</title>
 		<style>
 			html,
 			body {
 				width: 100%;
 				height: 100%;
-			}
-
-			.bg-item {
-				margin-bottom: 1rem;
-				width: 100%;
-			}
-			.bg-item img {
-				display: block;
-			}
-			.bg-item .title {
-				font-size: 14px;
 			}
 
 			#bg_list::-webkit-scrollbar {
@@ -35,6 +23,7 @@
 			}
 
 			.colors-list-box {
+				display: none;
 				transform-origin: 100% 0;
 				transform: scale(0);
 				opacity: 0;
@@ -43,22 +32,43 @@
 				transform: scale(1);
 				opacity: 1;
 			}
+
+			.options-list-box {
+				display: none;
+				transform-origin: 100% 0;
+				transform: scale(0);
+				opacity: 0;
+			}
+			.options-list-box.show {
+				transform: scale(1);
+				opacity: 1;
+			}
 		</style>
 	</head>
 
 	<body>
 		<div class="flex h-full">
-			<div class="p-6 w-2/12 h-full">
+			<div class="px-6 w-2/12 h-full">
 				<div id="bg_list" class="p-6 w-full h-full overflow-y-auto overflow-x-hidden rounded-2xl"></div>
 			</div>
 
 			<div class="p-6 w-10/12 h-full bg-white">
 				<div id="box" class="relative flex items-center justify-center w-full h-full bg-gray-100 rounded-2xl overflow-hidden">
 					<h1 class="z-50 text-6xl font-bold text-white">Color4Bg</h1>
+
+					<!-- colors modify -->
 					<div class="z-50 absolute top-4 right-4" id="box_colors">
 						<div class="absolute p-4 right-0 text-4xl rounded-full bg-gray-100/20 cursor-pointer hover:bg-gray-100/30 transition" id="btn_show_colors">🎨</div>
 						<div class="colors-list-box relative p-4 top-0 right-0 bg-gray-100 rounded-2xl transition">
 							<ul id="colors_list"></ul>
+						</div>
+					</div>
+
+					<!-- options -->
+					<div class="z-40 absolute top-4 right-32" id="box_options">
+						<div class="absolute p-4 right-0 text-4xl rounded-full bg-gray-100/20 cursor-pointer hover:bg-gray-100/30 transition" id="btn_show_options">🎛</div>
+						<div class="options-list-box relative p-4 top-0 right-0 bg-gray-100 rounded-2xl transition">
+							<ul id="options_list"></ul>
 						</div>
 					</div>
 				</div>
@@ -66,145 +76,23 @@
 		</div>
 
 		<script type="module">
-			import { AbstractShapeBg } from "../build/jsm/AbstractShapeBg.module.js"
-			import { AestheticFluidBg } from "../build/jsm/AestheticFluidBg.module.js"
-			import { BigBlobBg } from "../build/jsm/BigBlobBg.module.js"
-			import { BlurDotBg } from "../build/jsm/BlurDotBg.module.js"
-			import { BlurGradientBg } from "../build/jsm/BlurGradientBg.module.js"
-			import { AmbientLightBg } from "../build/jsm/AmbientLightBg.module.js"
-			import { RandomCubesBg } from "../build/jsm/RandomCubesBg.module.js"
-			import { TrianglesMosaicBg } from "../build/jsm/TrianglesMosaicBg.module.js"
-			import { WavyWavesBg } from "../build/jsm/WavyWavesBg.module.js"
+			import { Colors, Options, Bgs } from "./data.js"
+			import { UI, getBgTypeFromUrl } from "./ui.js"
+			import { GridArrayBg } from "../src/color4bg/AbstractBackground/GridArrayBg.js"
 
-			let colorbgs = [
-				{
-					name: "Abstract Shape",
-					img: "AbstractShape",
-					bg: AbstractShapeBg
-				},
-				{
-					name: "Aesthetic Fluid",
-					img: "AestheticFluid",
-					bg: AestheticFluidBg
-				},
-				{
-					name: "Blur Dot",
-					img: "BlurDot",
-					bg: BlurDotBg
-				},
-				{
-					name: "Blur Gradient",
-					img: "BlurGradient",
-					bg: BlurGradientBg
-				},
-				{
-					name: "Curl Gradient",
-					img: "AmbientLight",
-					bg: AmbientLightBg
-				},
-				{
-					name: "Triangles Mosaic",
-					img: "TrianglesMosaic",
-					bg: TrianglesMosaicBg
-				},
-				{
-					name: "Random Cubes",
-					img: "RandomCubes",
-					bg: RandomCubesBg
-				},
-				{
-					name: "Wavy Waves",
-					img: "WavyWaves",
-					bg: WavyWavesBg
-				},
-				{
-					name: "Big Blob",
-					img: "BigBlob",
-					bg: BigBlobBg
-				}
-			]
+			const palette = Colors["blue"]
 
-			let palette = Colors["blue"]
+			const ColorBg = getBgTypeFromUrl(Bgs)
+			const BgClass = ColorBg ? ColorBg.bg : GridArrayBg
 
-			// let colorbg = new AestheticFluidBg({
-			let colorbg = new AmbientLightBg({
-				dom: "box",
-				colors: palette,
-				seed: 1000,
-				loop: true
+			const colorbg = new BgClass({
+				dom: "box", // DOM that you want to add color background
+				colors: palette, // 6 Hex colors 
+				seed: 1000, // Random seed
+				loop: true // Whether the background would be loop animated
 			})
 
-			for (const paletteKey in Colors) {
-				let _colors = Colors[paletteKey]
-
-				let colorrow = document.createElement("li")
-				colorrow.setAttribute("class", "color-row m-2 p-3 min-w-40 flex justify-evenly hover:bg-white/50 rounded-lg cursor-pointer")
-				colorrow.addEventListener("click", () => [changePalette(_colors)])
-
-				_colors.forEach((hex, i) => {
-					let c = document.createElement("DIV")
-					c.setAttribute("class", "color w-5 h-5 rounded-lg")
-					c.setAttribute("style", "background:" + hex)
-					colorrow.appendChild(c)
-				})
-
-				colors_list.appendChild(colorrow)
-			}
-			
-			function changePalette(colors) {
-				document.querySelector("#box_colors").classList.remove("show")
-				palette = [...colors]
-				colorbg.colors(palette)
-			}
-
-			document.querySelector("#btn_show_colors").addEventListener("mouseenter", () => {
-				document.querySelector(".colors-list-box").classList.add("show")
-			})
-
-			document.querySelector("#box_colors").addEventListener("mouseleave", () => {
-				document.querySelector(".colors-list-box").classList.remove("show")
-			})
-
-			const $list = document.querySelector("#bg_list")
-
-			colorbgs.forEach((item, index) => {
-				let imgnode = document.createElement("IMG")
-				imgnode.src = `./assets/images/${item.img}.jpg`
-				imgnode.setAttribute("class", "rounded-lg hover:opacity-85 cursor-pointer")
-
-				let titlenode = document.createElement("DIV")
-				titlenode.setAttribute("class", "mt-1 text-sm text-gray-500")
-				titlenode.textContent = item.name
-
-				let childnode = document.createElement("DIV")
-				childnode.setAttribute("data-bg", item.img)
-				childnode.setAttribute("class", "bg-item")
-				childnode.appendChild(imgnode)
-				childnode.appendChild(titlenode)
-
-				childnode.addEventListener("click", function (e) {
-					let nextbg = e.target.parentNode.dataset.bg
-					onChangeBackground(nextbg)
-				})
-
-				$list.appendChild(childnode)
-			})
-
-			function onChangeBackground(bgname) {
-				colorbg.destroy()
-
-				let result = colorbgs.find(function (item) {
-					return item.img === bgname
-				})
-
-				colorbg = new result.bg({
-					dom: "box",
-					// colors: ["#D1ADFF", "#98D69B", "#FAE390", "#FFACD8", "#7DD5FF", "#D1ADFF"],
-					colors: ["#F00911", "#F3AA00", "#F6EE0B", "#39E90D", "#195ED2", "#F00911"],
-					seed: 1000,
-					loop: true
-				})
-			}
+			const ui = new UI(Colors, Bgs, Options, colorbg, palette)
 		</script>
 	</body>
 </html>

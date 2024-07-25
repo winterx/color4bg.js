@@ -1,6 +1,11 @@
 import { Renderer, Camera, Transform } from "../ogl/src/index.js"
 import seed from "../ogl/src/utils/SeedRandom.js"
+// import Stats from "../ogl/src/utils/stats.module.js"
 seed()
+
+
+// const stats = new Stats();
+// document.body.appendChild( stats.dom );
 
 export class ColorBg {
 	constructor(params = {}, num) {
@@ -137,6 +142,8 @@ export class ColorBg {
 			this.gl.clearColor(0.0, 0.0, 0.0, 1)
 			this.renderer.render({ scene: this.rttPlane, camera: this.rttCamera, target: this.rtt })
 		}
+
+		// stats.update()
 	}
 
 	_delete() {

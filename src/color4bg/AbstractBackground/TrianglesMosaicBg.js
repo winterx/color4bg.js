@@ -4,6 +4,7 @@ import { ColorBg } from "../ColorBg.js"
 export class TrianglesMosaicBg extends ColorBg {
 	constructor(params = {}) {
 		super(params, 6)
+		this.name = "triangles-mosaic"
 
 		this.options = this.params.options || {}
 

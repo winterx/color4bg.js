@@ -3,15 +3,15 @@ import { execSync } from 'child_process';
 
 
 const components = [
-  // 'aesthetic-fluid-bg',
-  // 'abstract-shape-bg',
+  'aesthetic-fluid-bg',
+  'abstract-shape-bg',
   'ambient-light-bg',
-  // 'blur-dot-bg',
-  // 'blur-gradient-bg',
-  // 'triangles-mosaic-bg',
-  // 'wavy-waves-bg',
-  // 'random-cubes-bg',
-  // 'big-blob-bg'
+  'blur-dot-bg',
+  'blur-gradient-bg',
+  'triangles-mosaic-bg',
+  'wavy-waves-bg',
+  'random-cubes-bg',
+  'big-blob-bg'
 ];
 
 components.forEach(component => {
