@@ -6,6 +6,7 @@ uniform float u_time;
 uniform vec2 u_resolution;
 
 uniform float u_scale;
+uniform float u_seed;
 uniform float u_w;
 uniform float u_h;
 uniform float u_x;
@@ -95,7 +96,7 @@ void main() {
     float mx = mod( sst.x, 10. ) / 10.;
     float my = mod( sst.y, 10. ) / 10.;
 
-    float rand_base = sin( dot( floor( sst / 10. ), vec2( 113.1, 17.81 ))) * 43758.545;
+    float rand_base = sin( dot( floor( sst / 10. ), vec2( 113.1, 17.81 ))) * u_seed;
     float rand_2 = 0.5 + 0.5 * cos( rand_base ); // for color pick
     rand_2 = mod( floor(rand_2 * 100.0), 10.0 ) / 10.0;
 

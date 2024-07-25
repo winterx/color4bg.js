@@ -3,7 +3,6 @@ import seed from "../ogl/src/utils/SeedRandom.js"
 // import Stats from "../ogl/src/utils/stats.module.js"
 seed()
 
-
 // const stats = new Stats();
 // document.body.appendChild( stats.dom );
 
@@ -30,9 +29,9 @@ export class ColorBg {
 
 		// DOM
 		this.parentDom = params.dom ? document.getElementById(params.dom) : document.body
-		const parentDomStyle = window.getComputedStyle(this.parentDom);
-		if (parentDomStyle.position === 'static') {
-			this.parentDom.style.position = 'relative';
+		const parentDomStyle = window.getComputedStyle(this.parentDom)
+		if (parentDomStyle.position === "static") {
+			this.parentDom.style.position = "relative"
 		}
 		const wh = this._getParentRect(this.parentDom)
 		this.canvasW = wh.w
@@ -119,8 +118,8 @@ export class ColorBg {
 	}
 
 	reset(seed) {
-		
-		this.rng = seed ? new Math.seedrandom(seed) : new Math.seedrandom(this.seed)
+		this.seed = seed ? seed : this.seed
+		this.rng = new Math.seedrandom(this.seed)
 
 		this._delete()
 		this._resetSeed()

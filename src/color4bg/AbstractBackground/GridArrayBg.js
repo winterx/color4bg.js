@@ -9,7 +9,7 @@ export class GridArrayBg extends ColorBg {
 		super(params, 6)
 		this.name = "grid-array"
 
-		this.speed = 50
+		this.speed = 56
 
 		this.start()
 	}
@@ -42,6 +42,7 @@ export class GridArrayBg extends ColorBg {
 			uniforms: {
 				u_time: { value: 0 },
 				u_resolution: { value: new Vec2(this.canvasH * 2, this.canvasH * 2) },
+				u_seed: { value: this.seed },
                 u_scale: { value: 100 },
 				u_w: { value: 0.8 },
 				u_h: { value: 0.8 },
@@ -66,8 +67,7 @@ export class GridArrayBg extends ColorBg {
 	}
 
 	_resetSeed() {
-		// this.rttProgram.uniforms.u_rand_1.value = this.rng() * 200 - 100
-		// this.rttProgram.uniforms.u_rand_2.value = this.rng() * 200 - 100
+		this.rttProgram.uniforms.u_seed.value = this.seed
 	}
 
 	_makeMaterial() {
@@ -177,6 +177,11 @@ export class GridArrayBg extends ColorBg {
 
 			case "rotateUnit":
 				this.rttProgram.uniforms.u_rotateUnit.value = parseFloat(val)
+				break
+
+			case "speed":
+				let sp = parseFloat(val)
+				this.speed = sp * -11 + 111
 				break
 
 			case "noise":

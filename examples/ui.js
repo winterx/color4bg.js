@@ -61,7 +61,7 @@ function listOptions(bg, options) {
 				})
 
 				let row = document.createElement("div")
-				row.setAttribute("class", "options-row flex")
+				row.setAttribute("class", "flex")
 
 				row.appendChild(slider_label)
 				row.appendChild(slider)
@@ -71,6 +71,24 @@ function listOptions(bg, options) {
 				break
 
 			case "text":
+				let textlabel = document.createElement("div")
+				textlabel.setAttribute("class", "slider-label my-1 mr-6 w-24 text-sm text-right")
+				textlabel.innerText = obj.display
+
+				let textinput = document.createElement("input")
+				textinput.type = "text"
+				textinput.value = 1000
+				textinput.addEventListener("input", function () {
+					bg.reset( parseFloat(this.value) )
+					console.log(bg.seed);
+				})
+
+				let textrow = document.createElement("div")
+				textrow.setAttribute("class", "flex")
+				textrow.appendChild(textlabel)
+				textrow.appendChild(textinput)
+
+				optionsbox.appendChild(textrow)
 				break
 		}
 	})
@@ -140,10 +158,18 @@ export function getBgTypeFromUrl(Bgs) {
 	for (const [key, value] of queryParams.entries()) {
 		switch (key) {
 			case "bg":
-				let bg = Bgs.find(function (item) {
+				let Bg = Bgs.find(function (item) {
 					return item.name === value
 				})
-				return bg
+
+				const colorbg = new Bg.class({
+					dom: "box", // DOM that you want to add color background
+					colors: ["#F00911", "#F3AA00", "#F6EE0B", "#39E90D", "#195ED2", "#F00911"], // 6 Hex colors
+					seed: 1000, // Random seed
+					loop: true // Whether the background would be loop animated
+				})
+
+				return colorbg
 		}
 	}
 

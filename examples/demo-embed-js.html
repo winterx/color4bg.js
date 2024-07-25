@@ -3,7 +3,6 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script src="https://cdn.tailwindcss.com"></script>
-		<script src="./data.js"></script>
         <script src="../build/js/AmbientLightBg.min.js"></script>
 		<title>Demo color4bg.js</title>
 		<style>
@@ -57,11 +56,9 @@
 		</div>
 
 		<script>
-			let palette = Colors["blue"]
-
 			let colorbg = new Color4Bg.AmbientLightBg({
 				dom: "box",
-				colors: palette,
+				colors: ["#F00911", "#F3AA00", "#F6EE0B", "#39E90D", "#195ED2", "#F00911"],
 				seed: 1000,
 				loop: true
 			})

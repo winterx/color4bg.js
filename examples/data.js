@@ -7,9 +7,7 @@ import { AmbientLightBg } from "../build/jsm/AmbientLightBg.module.js"
 import { RandomCubesBg } from "../build/jsm/RandomCubesBg.module.js"
 import { TrianglesMosaicBg } from "../build/jsm/TrianglesMosaicBg.module.js"
 import { WavyWavesBg } from "../build/jsm/WavyWavesBg.module.js"
-
-// import { GridArray } from "../build/jsm/GridArray.module.js"
-import { GridArrayBg } from "../src/color4bg/AbstractBackground/GridArrayBg.js"
+import { GridArrayBg } from "../build/jsm/GridArrayBg.module.js"
 import { StepGradientBg } from "../src/color4bg/AbstractBackground/StepGradientBg.js"
 
 const Colors = {
@@ -23,43 +21,43 @@ const Colors = {
 const Bgs = [
 	{
 		name: "abstract-shape",
-		bg: AbstractShapeBg
+		class: AbstractShapeBg
 	},
 	{
 		name: "aesthetic-fluid",
-		bg: AestheticFluidBg
+		class: AestheticFluidBg
 	},
 	{
 		name: "ambient-light",
-		bg: AmbientLightBg
+		class: AmbientLightBg
 	},
 	{
 		name: "big-blob",
-		bg: BigBlobBg
+		class: BigBlobBg
 	},
 	{
 		name: "blur-dot",
-		bg: BlurDotBg
+		class: BlurDotBg
 	},
 	{
 		name: "blur-gradient",
-		bg: BlurGradientBg
+		class: BlurGradientBg
 	},
 	{
 		name: "grid-array",
-		bg: GridArrayBg
+		class: GridArrayBg
 	},
 	{
 		name: "random-cubes",
-		bg: RandomCubesBg
+		class: RandomCubesBg
 	},
 	{
 		name: "triangles-mosaic",
-		bg: TrianglesMosaicBg
+		class: TrianglesMosaicBg
 	},
 	{
 		name: "wavy-waves",
-		bg: WavyWavesBg
+		class: WavyWavesBg
 	}
 ]
 
@@ -227,7 +225,22 @@ const Options = {
 			max: 360,
 			step: 1,
 			value: 0
-		}
+		},
+		{
+			type: "text",
+			name: "seed",
+			display: "Seed",
+			value: 1000
+		},
+		{
+			type: "range",
+			name: "speed",
+			display: "Speed",
+			min: 1,
+			max: 10,
+			step: 1,
+			value: 5
+		},
 	],
 	"random-cubes": [],
 	"triangles-mosaic": [
