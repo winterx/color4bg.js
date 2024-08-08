@@ -9,6 +9,7 @@ const components = [
   'big-blob-bg',
   'blur-dot-bg',
   'blur-gradient-bg',
+  'chaos-waves-bg',
   'grid-array-bg',
   'random-cubes-bg',
   'triangles-mosaic-bg',

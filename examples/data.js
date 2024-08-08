@@ -3,6 +3,7 @@ import { AestheticFluidBg } from "../build/jsm/AestheticFluidBg.module.js"
 import { BigBlobBg } from "../build/jsm/BigBlobBg.module.js"
 import { BlurDotBg } from "../build/jsm/BlurDotBg.module.js"
 import { BlurGradientBg } from "../build/jsm/BlurGradientBg.module.js"
+import { ChaosWavesBg } from "../build/jsm/ChaosWavesBg.module.js"
 import { AmbientLightBg } from "../build/jsm/AmbientLightBg.module.js"
 import { RandomCubesBg } from "../build/jsm/RandomCubesBg.module.js"
 import { TrianglesMosaicBg } from "../build/jsm/TrianglesMosaicBg.module.js"
@@ -42,6 +43,10 @@ const Bgs = [
 	{
 		name: "blur-gradient",
 		class: BlurGradientBg
+	},
+	{
+		name: "chaos-waves",
+		class: ChaosWavesBg
 	},
 	{
 		name: "grid-array",
@@ -153,6 +158,26 @@ const Options = {
 			value: 0.1
 		}
 	],
+	"chaos-waves": [
+		{
+			type: "range",
+			name: "noise",
+			display: "Noise",
+			min: 0.0,
+			max: 0.5,
+			step: 0.01,
+			value: 0.1
+		},
+		{
+			type: "range",
+			name: "speed",
+			display: "Speed",
+			min: 1,
+			max: 20,
+			step: 1,
+			value: 1
+		}
+	],
 	"grid-array": [
 		{
 			type: "range",
@@ -240,7 +265,7 @@ const Options = {
 			max: 10,
 			step: 1,
 			value: 5
-		},
+		}
 	],
 	"random-cubes": [],
 	"triangles-mosaic": [

@@ -71,6 +71,11 @@
 							<ul id="options_list"></ul>
 						</div>
 					</div>
+
+					<!-- options -->
+					<div class="z-40 absolute top-4 left-20" id="box_options">
+						<div class="absolute p-4 right-0 text-4xl rounded-full bg-gray-100/20 cursor-pointer hover:bg-gray-100/30 transition" id="btn_resetSeed">🎲</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -78,14 +83,15 @@
 		<script type="module">
 			import { Colors, Options, Bgs } from "./data.js"
 			import { UI, getBgTypeFromUrl } from "./ui.js"
-			import { GridArrayBg } from "../build/jsm/GridArrayBg.module.js"
+			// import { ChaosWavesBg } from "../build/jsm/ChaosWavesBg.module.js"
+			import { ChaosWavesBg } from "../src/color4bg/AbstractBackground/ChaosWavesBg.js"
 
 			const palette = Colors["blue"]
-			
+
 			let colorbg = getBgTypeFromUrl(Bgs)
 
 			if (!colorbg) {
-				colorbg = new GridArrayBg({
+				colorbg = new ChaosWavesBg({
 					dom: "box", // DOM that you want to add color background
 					colors: palette, // 6 Hex colors
 					seed: 1000, // Random seed

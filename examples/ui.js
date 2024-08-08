@@ -3,6 +3,7 @@ export class UI {
 		listColorBgs(Bgs)
 		listPalettes(Colors, colorbg, palette)
 		listOptions(colorbg, Options)
+		initUIEvents(colorbg)
 	}
 }
 
@@ -79,8 +80,8 @@ function listOptions(bg, options) {
 				textinput.type = "text"
 				textinput.value = 1000
 				textinput.addEventListener("input", function () {
-					bg.reset( parseFloat(this.value) )
-					console.log(bg.seed);
+					bg.reset(parseFloat(this.value))
+					console.log(bg.seed)
 				})
 
 				let textrow = document.createElement("div")
@@ -92,8 +93,6 @@ function listOptions(bg, options) {
 				break
 		}
 	})
-
-	initUIEvents()
 }
 
 function listColorBgs(ColorBgs) {
@@ -119,7 +118,7 @@ function listColorBgs(ColorBgs) {
 	})
 }
 
-function initUIEvents() {
+function initUIEvents(colorbg) {
 	document.querySelector("#btn_show_colors").addEventListener("mouseenter", () => {
 		let colorsdom = document.querySelector(".colors-list-box")
 		colorsdom.style.display = "block"
@@ -150,6 +149,11 @@ function initUIEvents() {
 		setTimeout(() => {
 			colorsdom.classList.remove("show")
 		}, 200)
+	})
+
+	document.querySelector("#btn_resetSeed").addEventListener("click", () => {
+		let random = Math.floor( Math.random() * 100000 )
+		colorbg.reset(random)
 	})
 }
 
