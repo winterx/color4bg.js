@@ -52,8 +52,7 @@ let colorbg = new AestheticFluidBg({
 
 
 ## All Background(Bg) Types
-![all bg](https://github.com/user-attachments/assets/6e4faace-6baa-42f1-8e0e-e969a277412f)
-
+![All bg](https://github.com/user-attachments/assets/68dd9cc9-3182-49ee-b8d5-cd6301902b6e)
 
 
 
