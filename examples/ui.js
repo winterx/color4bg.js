@@ -153,7 +153,7 @@ function initUIEvents(colorbg) {
 
 	document.querySelector("#btn_resetSeed").addEventListener("click", () => {
 		let random = Math.floor( Math.random() * 100000 )
-		colorbg.reset(random)
+		colorbg.reset(random)		
 	})
 }
 

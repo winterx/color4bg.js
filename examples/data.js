@@ -268,6 +268,44 @@ const Options = {
 		}
 	],
 	"random-cubes": [],
+	"swirling-curves": [
+		{
+			type: "range",
+			name: "noise",
+			display: "Noise",
+			min: 0.0,
+			max: 0.5,
+			step: 0.01,
+			value: 0.1
+		},
+		{
+			type: "range",
+			name: "speed",
+			display: "Speed",
+			min: 0.1,
+			max: 5,
+			step: 0.01,
+			value: 0.1
+		},
+		{
+			type: "range",
+			name: "density",
+			display: "Density",
+			min: 100,
+			max: 2000,
+			step: 100,
+			value: 1500
+		},
+		{
+			type: "range",
+			name: "scale",
+			display: "Scale",
+			min: 0.1,
+			max: 50,
+			step: 0.1,
+			value: 8.0
+		}
+	],
 	"triangles-mosaic": [
 		{
 			type: "range",
