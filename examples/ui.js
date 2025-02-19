@@ -1,3 +1,5 @@
+import { Colors, Options, Bgs } from "./data.js"
+
 export class UI {
 	constructor(Colors, Bgs, Options, colorbg, palette) {
 		listColorBgs(Bgs)
@@ -168,7 +170,7 @@ export function getBgTypeFromUrl(Bgs) {
 
 				const colorbg = new Bg.class({
 					dom: "box", // DOM that you want to add color background
-					colors: ["#F00911", "#F3AA00", "#F6EE0B", "#39E90D", "#195ED2", "#F00911"], // 6 Hex colors
+					colors: Colors[Bg.palette], // 6 Hex colors
 					seed: 1000, // Random seed
 					loop: true // Whether the background would be loop animated
 				})

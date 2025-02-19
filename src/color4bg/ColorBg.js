@@ -34,8 +34,11 @@ export class ColorBg {
 			this.parentDom.style.position = "relative"
 		}
 		const wh = this._getParentRect(this.parentDom)
-		this.canvasW = wh.w
-		this.canvasH = wh.h
+		this.canvasW = this.originW = wh.w
+		this.canvasH = this.originH = wh.h
+
+		this.originRatio = this.originW / this.originH
+		this.resize_mode = params.resize_mode
 
 		// GL
 		this.renderer = new Renderer()
@@ -55,6 +58,11 @@ export class ColorBg {
 		this.isRenderTarget = false
 
 		this.scene = new Transform()
+
+		// RESIZE
+		window.addEventListener("resize", () => {
+			this.resize()
+		})
 	}
 
 	_getParentRect(dom) {
@@ -111,10 +119,32 @@ export class ColorBg {
 		const wh = this._getParentRect(this.parentDom)
 		this.canvasW = wh.w
 		this.canvasH = wh.h
+		this.canvasRatio = this.canvasW / this.canvasH
+
 		this.renderer.setSize(this.canvasW, this.canvasH)
-		this.camera.orthographic({ near: 0.1, far: 10001, left: -this.canvasW / 2, right: this.canvasW / 2, bottom: -this.canvasH / 2, top: this.canvasH / 2, zoom: 1 })
-		this._size()
-		this.reset()
+
+		let zoom = 1
+		const newRatio = this.canvasW / this.canvasH
+
+		if (newRatio > this.originRatio) {
+			if (this.canvasW > this.originW) {
+				zoom = this.canvasW / this.originW
+			}
+		} else if (newRatio < this.originRatio) {
+			if (this.canvasH > this.originH) {
+				zoom = this.canvasH / this.originH
+			}
+		}
+
+		this.camera.orthographic({
+			near: 0.1,
+			far: 10001,
+			left: -this.canvasW / 2,
+			right: this.canvasW / 2,
+			bottom: -this.canvasH / 2,
+			top: this.canvasH / 2,
+			zoom
+		})
 	}
 
 	reset(seed) {

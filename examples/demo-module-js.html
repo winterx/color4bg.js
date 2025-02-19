@@ -47,13 +47,13 @@
 	</head>
 
 	<body>
-		<div class="flex h-full">
-			<div class="px-6 w-2/12 h-full">
+		<div class="flex h-screen">
+			<div class="px-6 w-64 h-screen">
 				<div id="bg_list" class="p-6 w-full h-full overflow-y-auto overflow-x-hidden rounded-2xl"></div>
 			</div>
 
-			<div class="p-6 w-10/12 h-full bg-white">
-				<div id="box" class="relative flex items-center justify-center w-full h-full bg-gray-100 rounded-2xl overflow-hidden">
+			<div class="p-6 flex-1 h-full bg-white">
+				<div id="box" class="flex items-center justify-center w-full h-full bg-gray-100 rounded-2xl overflow-hidden">
 					<h1 class="z-50 text-6xl font-bold text-white">Color4Bg</h1>
 
 					<!-- colors modify -->
@@ -83,19 +83,19 @@
 		<script type="module">
 			import { Colors, Options, Bgs } from "./data.js"
 			import { UI, getBgTypeFromUrl } from "./ui.js"
-			import { SwirlingCurvesBg } from "../build/jsm/SwirlingCurvesBg.module.js"
-			// import { SwirlingCurvesBg } from "../src/color4bg/AbstractBackground/SwirlingCurvesBg.js"
+			// import { CurveGradientBg } from "../build/jsm/CurveGradientBg.module.js"
+			import { CurveGradientBg } from "../src/color4bg/AbstractBackground/CurveGradientBg.js"
 
-			const palette = Colors["vivid"]
+			const palette = Colors["pastelglossy"]
 
 			let colorbg = getBgTypeFromUrl(Bgs)
 
 			if (!colorbg) {
-				colorbg = new SwirlingCurvesBg({
+				colorbg = new CurveGradientBg({
 					dom: "box", // DOM that you want to add color background
-					colors: palette, // 6 Hex colors
+					colors: ["#FE8BFC", "#BD9FFB", "#8EDBFD", "#C4F5EF", "#E7F9FE", "#E9FFE0"], // 6 Hex colors
 					seed: 1000, // Random seed
-					loop: true // Whether the background would be loop animated
+					loop: true, // Whether the background would be loop animated,
 				})
 			}
 

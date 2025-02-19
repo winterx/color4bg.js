@@ -223,6 +223,8 @@ export class BigBlobBg extends ColorBg {
 	}
 
 	_make() {
+		console.log('make');
+		
 		// BACKGROUND
 		const planeGeometry = new Plane(this.gl, {
 			width: this.canvasW,

@@ -4,6 +4,7 @@ import { BigBlobBg } from "../build/jsm/BigBlobBg.module.js"
 import { BlurDotBg } from "../build/jsm/BlurDotBg.module.js"
 import { BlurGradientBg } from "../build/jsm/BlurGradientBg.module.js"
 import { ChaosWavesBg } from "../build/jsm/ChaosWavesBg.module.js"
+import { CurveGradientBg } from "../build/jsm/CurveGradientBg.module.js"
 import { AmbientLightBg } from "../build/jsm/AmbientLightBg.module.js"
 import { RandomCubesBg } from "../build/jsm/RandomCubesBg.module.js"
 import { TrianglesMosaicBg } from "../build/jsm/TrianglesMosaicBg.module.js"
@@ -13,6 +14,7 @@ import { StepGradientBg } from "../src/color4bg/AbstractBackground/StepGradientB
 
 const Colors = {
 	pastel: ["#D1ADFF", "#98D69B", "#FAE390", "#FFACD8", "#7DD5FF", "#D1ADFF"], // pastel
+	pastelglossy: ["#FE8BFC", "#BD9FFB", "#8EDBFD", "#C4F5EF", "#E7F9FE", "#E9FFE0"], // glossy pastel
 	vivid: ["#F00911", "#F3AA00", "#F6EE0B", "#39E90D", "#195ED2", "#F00911"], // vivid
 	blue: ["#007FFE", "#3099FE", "#60B2FE", "#90CCFE", "#C0E5FE", "#F0FFFE"], // gradient blue
 	black: ["#000000", "#3F3F3F", "#7F7F7F", "#DADADA", "#EAEAEA", "#F3F3F3"],
@@ -22,47 +24,63 @@ const Colors = {
 const Bgs = [
 	{
 		name: "abstract-shape",
-		class: AbstractShapeBg
+		class: AbstractShapeBg,
+		palette: "blue"
 	},
 	{
 		name: "aesthetic-fluid",
-		class: AestheticFluidBg
+		class: AestheticFluidBg,
+		palette: "vivid"
 	},
 	{
 		name: "ambient-light",
-		class: AmbientLightBg
+		class: AmbientLightBg,
+		palette: "vivid"
 	},
 	{
 		name: "big-blob",
-		class: BigBlobBg
+		class: BigBlobBg,
+		palette: "pastel"
 	},
 	{
 		name: "blur-dot",
-		class: BlurDotBg
+		class: BlurDotBg,
+		palette: "pastelglossy"
 	},
 	{
 		name: "blur-gradient",
-		class: BlurGradientBg
+		class: BlurGradientBg,
+		palette: "pastelglossy"
 	},
 	{
 		name: "chaos-waves",
-		class: ChaosWavesBg
+		class: ChaosWavesBg,
+		palette: "pastel"
+	},
+	{
+		name: "curve-gradient",
+		class: CurveGradientBg,
+		palette: "pastelglossy"
 	},
 	{
 		name: "grid-array",
-		class: GridArrayBg
+		class: GridArrayBg,
+		palette: "blue"
 	},
 	{
 		name: "random-cubes",
-		class: RandomCubesBg
+		class: RandomCubesBg,
+		palette: "pastelglossy"
 	},
 	{
 		name: "triangles-mosaic",
-		class: TrianglesMosaicBg
+		class: TrianglesMosaicBg,
+		palette: "pastel"
 	},
 	{
 		name: "wavy-waves",
-		class: WavyWavesBg
+		class: WavyWavesBg,
+		palette: "pastelglossy"
 	}
 ]
 
@@ -177,6 +195,35 @@ const Options = {
 			step: 1,
 			value: 1
 		}
+	],
+	"curve-gradient": [
+		{
+			type: "range",
+			name: "noise",
+			display: "Noise",
+			min: 0.0,
+			max: 0.5,
+			step: 0.01,
+			value: 0.1
+		},
+		{
+			type: "range",
+			name: "speed",
+			display: "Speed",
+			min: 1,
+			max: 20,
+			step: 1,
+			value: 1
+		},
+		{
+			type: "range",
+			name: "scale",
+			display: "Scale",
+			min: 0.01,
+			max: 4,
+			step: 0.01,
+			value: 1
+		},
 	],
 	"grid-array": [
 		{
