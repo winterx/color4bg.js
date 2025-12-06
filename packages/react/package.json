@@ -1,0 +1,42 @@
+{
+  "name": "@color4bg/react",
+  "version": "0.1.2",
+  "description": "React component for color4bg - Cool colorful backgrounds",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    }
+  },
+  "files": [
+    "index.js",
+    "src/",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/winterx/color4bg.js.git",
+    "directory": "packages/react"
+  },
+  "author": "winterx",
+  "keywords": [
+    "react",
+    "background",
+    "webgl",
+    "color4bg",
+    "colorful",
+    "background-image"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "color4bg": "^0.1.1"
+  }
+}
+
