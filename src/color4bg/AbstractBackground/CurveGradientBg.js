@@ -130,7 +130,8 @@ export class CurveGradientBg extends ColorBg {
 	}
 
 	_animate() {
-		this.rttProgram.uniforms.u_time.value = this.frame * this.speed / 100
+		this.rttProgram.uniforms.u_time.value = (this.frame * this.speed) / 100
+		console.log(1)
 	}
 
 	update(option, val) {

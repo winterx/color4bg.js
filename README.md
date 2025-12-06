@@ -19,14 +19,35 @@ Please visit: [color4bg.com](https://www.color4bg.com)
 - Easy Integration: Simply import the **Bg class and create an instance with your desired settings.
 
 
+## 📦 Installation
+
+Install color4bg via npm:
+
+```bash
+npm install color4bg
+```
+
+Or via yarn:
+
+```bash
+yarn add color4bg
+```
+
+Or via pnpm:
+
+```bash
+pnpm add color4bg
+```
+
+
 ## 📦 Usage
 To use color4bg.js, follow these steps:
 
 > For example, if you want to add Aesthetic Fluid Bg:
 
-1. Import the AestheticFluidBg module js file:
+1. Import the AestheticFluidBg class from the package:
 ```javascript
-import { AestheticFluidBg } from "../build/jsm/AestheticFluidBg.module.js"
+import { AestheticFluidBg } from "color4bg"
 ```
 
 2. Create an instance of AestheticFluidBg with your customized settings:
@@ -37,7 +58,36 @@ let colorbg = new AestheticFluidBg({
     seed: 1000,
     loop: true
 })
+
+// Don't forget to start the animation
+colorbg.start()
 ```
+
+### Available Background Classes
+
+You can import any of the following background classes:
+
+```javascript
+import {
+  AbstractShapeBg,
+  AestheticFluidBg,
+  AmbientLightBg,
+  BigBlobBg,
+  BlurDotBg,
+  BlurGradientBg,
+  ChaosWavesBg,
+  CurveGradientBg,
+  GridArrayBg,
+  RandomCubesBg,
+  StepGradientBg,
+  SwirlingCurvesBg,
+  TrianglesMosaicBg,
+  WavyWavesBg,
+  ColorBg  // Base class
+} from "color4bg"
+```
+
+### Configuration Options
 
 | Key | Value     | Describe                       |
 | :-------- | :------- | :-------------------------------- |
