@@ -40,7 +40,7 @@ pnpm add color4bg
 ```
 
 
-## 📦 Usage
+## 📖 Usage
 To use color4bg.js, follow these steps:
 
 > For example, if you want to add Aesthetic Fluid Bg:
@@ -60,6 +60,45 @@ let colorbg = new AestheticFluidBg({
 })
 ```
 
+### Integrations
+
+#### React
+
+For React projects, you can use the `@color4bg/react` package which provides a ready-to-use React component.
+
+**Installation:**
+
+```bash
+npm install @color4bg/react
+```
+
+**Quick Start:**
+
+```jsx
+import { Color4Bg } from '@color4bg/react'
+
+function App() {
+  return (
+    <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
+      <Color4Bg style="abstract-shape" />
+      <h1>Your content here</h1>
+    </div>
+  )
+}
+```
+
+**With Custom Colors:**
+
+```jsx
+<Color4Bg 
+  style="aesthetic-fluid"
+  colors={["#D1ADFF", "#98D69B", "#FAE390", "#FFACD8", "#7DD5FF", "#D1ADFF"]}
+  loop={true}
+  seed={1000}
+/>
+```
+
+> 📚 **For more details, examples, and API documentation, please visit the [@color4bg/react package directory](./packages/react)**
 
 
 ## All Background(Bg) Types
