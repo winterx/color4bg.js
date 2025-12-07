@@ -58,10 +58,12 @@ let colorbg = new AestheticFluidBg({
     seed: 1000,
     loop: true
 })
-
-// Don't forget to start the animation
-colorbg.start()
 ```
+
+
+
+## All Background(Bg) Types
+![All bg](https://github.com/user-attachments/assets/68dd9cc9-3182-49ee-b8d5-cd6301902b6e)
 
 ### Available Background Classes
 
@@ -100,9 +102,6 @@ import {
 
 #### For more usage, see examples
 
-
-## All Background(Bg) Types
-![All bg](https://github.com/user-attachments/assets/68dd9cc9-3182-49ee-b8d5-cd6301902b6e)
 
 
 

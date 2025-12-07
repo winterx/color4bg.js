@@ -49,28 +49,6 @@ The `Color4Bg` component automatically mounts a canvas to its parent container. 
 
 Since `Color4Bg` uses browser APIs (WebGL, Canvas), it must be used as a client component. Make sure to add `'use client'` directive at the top of your file when using this component.
 
-### Using Color4BgProvider (Server Component Friendly)
-
-If you want to use colorful backgrounds in **Server Components** (for better SEO), you can use `Color4BgProvider` instead. The Provider component handles the client-side logic internally, so you don't need to add `'use client'` to your page component.
-
-```jsx
-// app/page.js - No 'use client' needed!
-import { Color4BgProvider } from '@color4bg/next'
-
-export default function Page() {
-  return (
-    <Color4BgProvider style="abstract-shape">
-      <h1>Your Content</h1>
-      <p>This page is a Server Component!</p>
-    </Color4BgProvider>
-  )
-}
-```
-
-**When to use Provider vs Component:**
-- Use `Color4BgProvider` when you want to keep your page/component as a Server Component (better SEO, faster initial load)
-- Use `Color4Bg` when you need more control over the container or when you're already in a Client Component
-
 ### Basic Example
 
 ```jsx
@@ -306,104 +284,6 @@ export default function Section() {
   )
 }
 ```
-
-### Using Color4BgProvider in App Router Layout
-
-```jsx
-// app/layout.js - Server Component, no 'use client' needed!
-import { Color4BgProvider } from '@color4bg/next'
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <Color4BgProvider 
-          style="abstract-shape"
-          containerStyle={{ width: '100vw', height: '100vh' }}
-        >
-          {children}
-        </Color4BgProvider>
-      </body>
-    </html>
-  )
-}
-```
-
-### Using Color4BgProvider with Custom Styles
-
-```jsx
-// app/page.js - Server Component
-import { Color4BgProvider } from '@color4bg/next'
-
-export default function Page() {
-  return (
-    <Color4BgProvider 
-      style="aesthetic-fluid"
-      colors={["#D1ADFF", "#98D69B", "#FAE390"]}
-      loop={true}
-      className="my-container"
-      containerStyle={{ minHeight: '100vh', padding: '2rem' }}
-    >
-      <h1>Server Component with Background</h1>
-      <p>No 'use client' directive needed!</p>
-    </Color4BgProvider>
-  )
-}
-```
-
-## 🔧 Next.js App Router Specifics
-
-### Server vs Client Components
-
-**Recommended: Use `Color4BgProvider` for Server Components**
-
-`Color4BgProvider` is designed specifically for Server Components. It handles all client-side logic internally, so you can use it directly in Server Components without any wrapper:
-
-```jsx
-// app/page.js - Server Component
-import { Color4BgProvider } from '@color4bg/next'
-
-export default function Page() {
-  return (
-    <Color4BgProvider style="abstract-shape">
-      <h1>Server Component Content</h1>
-    </Color4BgProvider>
-  )
-}
-```
-
-**Alternative: Use `Color4Bg` in Client Components**
-
-If you need more control or are already in a Client Component, use `Color4Bg` directly:
-
-```jsx
-// app/page.js - Client Component
-'use client'
-
-import { Color4Bg } from '@color4bg/next'
-
-export default function Page() {
-  return (
-    <div className="container">
-      <Color4Bg style="abstract-shape" />
-      <h1>Client Component Content</h1>
-    </div>
-  )
-}
-```
-
-### Color4BgProvider Props
-
-| Prop | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| `children` | `React.ReactNode` | ✅ Yes | - | Child components to render |
-| `style` | `string` | ✅ Yes | - | Background type (see available styles) |
-| `colors` | `string[]` | ❌ No | `[]` | Array of up to 6 hexadecimal color values |
-| `seed` | `number` | ❌ No | `1000` | Random seed for generating consistent patterns |
-| `loop` | `boolean` | ❌ No | `false` | Whether the background should animate in a loop |
-| `options` | `object` | ❌ No | `{}` | Background-specific options |
-| `className` | `string` | ❌ No | - | Custom className for the container |
-| `containerStyle` | `object` | ❌ No | `{}` | Custom style object for the container |
 
 ## 📚 Related Packages
 

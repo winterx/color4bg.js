@@ -7,19 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0] - 2024-12-XX
 
-### Added
+### Changed
 
-- `Color4BgProvider` component for Server Component support
-- Ability to use colorful backgrounds in Next.js Server Components without `'use client'` directive
-- `containerStyle` and `className` props for customizing Provider container styles
-- Comprehensive documentation for Server Component usage patterns
-
-### Features
-
-- `Color4BgProvider` allows usage in Server Components (better SEO, faster initial load)
-- Provider component handles all client-side logic internally
-- Backward compatible - existing `Color4Bg` component continues to work
-- Support for all background types and configuration options in Provider
+- Simplified API: Only `Color4Bg` component is available, consistent with React integration
+- `Color4Bg` component now uses `.jsx` extension with `'use client'` directive
 
 ## [0.1.0] - 2024-12-XX
 

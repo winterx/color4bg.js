@@ -195,4 +195,3 @@ export function Color4Bg({ style, colors, seed, loop, options }) {
 }
 
 export default Color4Bg
-
