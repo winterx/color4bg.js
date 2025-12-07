@@ -2,7 +2,7 @@
 
 
 
-# color4bg.js [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+# color4bg.js [![npm version](https://img.shields.io/npm/v/color4bg.svg)](https://www.npmjs.com/package/color4bg) [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 Super easily generate dynamic, abstract, and visually stunning background images for your web pages based on WebGL and JavaScript. High performance.
 
 
