@@ -1,6 +1,6 @@
 {
   "name": "@color4bg/next",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Next.js component for color4bg - Cool colorful backgrounds",
   "main": "index.js",
   "module": "index.js",
